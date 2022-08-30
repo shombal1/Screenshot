@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Screnshots" GeneratedClassName="GlobalSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="FirstKeyShow" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">116</Value>
+    </Setting>
+    <Setting Name="SecondKeyShow" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="FirstKeyHide" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">116</Value>
+    </Setting>
+    <Setting Name="SecondKeyHide" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">66</Value>
+    </Setting>
+    <Setting Name="CreateScreenshotFirstKey" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">116</Value>
+    </Setting>
+    <Setting Name="CreateScreenshotSecondKey" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">47</Value>
+    </Setting>
+    <Setting Name="NumberSave" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="PathSave" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

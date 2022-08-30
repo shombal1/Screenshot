@@ -1,0 +1,28 @@
+﻿<Window x:Class="Screnshots.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Screnshots"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" x:Name="Window" MinWidth="484" MaxWidth="484" Height="298" Width="484">
+    <Grid x:Name="grid">
+        <Label Content="Свернуть окно" FontSize="17" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.507,0.091"/>
+        <Label Content="Развернуть окно" FontSize="17" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.507,0.091"/>
+        <Label Content="Скриншот" FontSize="17" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.507,0.091"/>
+        <TextBox x:Name="HideFirstKey" HorizontalAlignment="Left" FontSize="17" Margin="172,30,0,0" IsReadOnly="True" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ShowFirstKey" HorizontalAlignment="Left" FontSize="17" Margin="172,68,0,0" IsReadOnly="True" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="CreateScreenshotFirstKey" HorizontalAlignment="Left" FontSize="17" Margin="172,106,0,0" IsReadOnly="True" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="+" FontSize="17" HorizontalAlignment="Left" Margin="292,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.674,0.444"/>
+        <Label Content="+" FontSize="17" HorizontalAlignment="Left" Margin="292,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.674,0.444"/>
+        <Label Content="+" FontSize="17" HorizontalAlignment="Left" Margin="292,102,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.652,0.412"/>
+        <TextBox x:Name="HideSecondKey" HorizontalAlignment="Left" FontSize="17" Margin="314,30,0,0" IsReadOnly="True" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ShowSecondKey" HorizontalAlignment="Left" FontSize="17" Margin="314,68,0,0" IsReadOnly="True" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="CreateScreenshotSecondKey" HorizontalAlignment="Left" FontSize="17" Margin="314,106,0,0" IsReadOnly="True" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button Focusable="False" Content="Start" HorizontalAlignment="Left" Margin="186,189,0,0" VerticalAlignment="Top" Height="54" Width="106" Click="Button_Click"/>
+        <Label Content="Путь к сохранению" FontSize="17" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Path" Focusable="True" IsReadOnly="False" HorizontalAlignment="Left" FontSize="16" Margin="172,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxHeight="23" Width="262" HorizontalScrollBarVisibility="Visible"/>
+
+
+    </Grid>
+</Window>
