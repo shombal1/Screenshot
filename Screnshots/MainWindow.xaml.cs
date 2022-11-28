@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,31 +22,33 @@ namespace Screnshots
     /// </summary>
     public partial class MainWindow : Window
     {
-        Rectangle Select;
+        Rectangle SelectRectangle;
         double X = 0;
         double Y = 0;
         bool DoOnce = false;
+        DispatcherTimer timer = new DispatcherTimer();
 
         public MainWindow()
         {
             InitializeComponent();
             BaseWindow.Topmost = true;
             BaseWindow.WindowState = WindowState.Maximized;
-            BaseWindow.Closing += BaseWindow_Closing;
+            BaseWindow.Closing+=BaseWindow_Closing;
 
-            DispatcherTimer timre = new DispatcherTimer();
-            timre.Interval = TimeSpan.FromMilliseconds(1);
-            timre.Tick += Timre_Tick;
-            timre.Start();
+            timer.Interval = TimeSpan.FromMilliseconds(3);
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
 
         private void BaseWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            timer.Tick -=Timer_Tick;
             Settings.Save();
         }
 
-        private void Timre_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
+            timer.Stop();
             if (Keyboard.IsKeyUp(Settings.CreateScreenshotSecondKey))
             {
                 DoOnce = true;
@@ -62,40 +65,41 @@ namespace Screnshots
             if (Keyboard.IsKeyDown(Settings.CreateScreenshotFirstKey) && Keyboard.IsKeyDown(Settings.CreateScreenshotSecondKey) && DoOnce)
             {
                 DoOnce = false;
-                if (Select.Height > 0 && Select.Width > 0)
+                if (SelectRectangle!=null && SelectRectangle.Height > 0 && SelectRectangle.Width > 0)
                 {
                     if (System.IO.Directory.Exists(Settings.PathSave))
-                    {
+                    {    
                         BaseWindow.WindowState = WindowState.Minimized;
-                        using (System.Drawing.Bitmap p = new System.Drawing.Bitmap((int)Select.Width, (int)Select.Height))
+                        using (System.Drawing.Bitmap p = new System.Drawing.Bitmap((int)SelectRectangle.Width, (int)SelectRectangle.Height))
                         {
                             System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage(p);
-                            graphics.CopyFromScreen((int)Select.Margin.Left - 7, (int)Select.Margin.Top - 7, 0, 0, p.Size);
-                            p.Save($"{Settings.PathSave}\\image{Settings.NumberSave}.jpg");
+                            graphics.CopyFromScreen((int)SelectRectangle.Margin.Left - 7, (int)SelectRectangle.Margin.Top - 7, 0, 0, p.Size);
+                            p.Save($"{Settings.PathSave}\\image{Settings.NumberSave}-{System.IO.Path.GetRandomFileName().Replace(".",String.Empty)}.jpg");
                             Settings.NumberSave++;
                         }
                         BaseWindow.WindowState = WindowState.Maximized;
-                    }
+                    } 
                     else
                     {
                         MessageBox.Show("Указанный путь не существует");
                     }
                 }
             }
+            timer.Start();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            grid.Children.Remove(Select);
-            Select = new Rectangle();
-            Select.Fill = Brushes.Black;
-            Select.HorizontalAlignment = HorizontalAlignment.Left;
-            Select.VerticalAlignment = VerticalAlignment.Top;
-            Select.Margin = new Thickness(Mouse.GetPosition(BaseWindow).X, Mouse.GetPosition(BaseWindow).Y, 0, 0);
-            Y = Select.Margin.Top;
-            X = Select.Margin.Left;
+            grid.Children.Remove(SelectRectangle);
+            SelectRectangle = new Rectangle();
+            SelectRectangle.Fill = Brushes.Black;
+            SelectRectangle.HorizontalAlignment = HorizontalAlignment.Left;
+            SelectRectangle.VerticalAlignment = VerticalAlignment.Top;
+            SelectRectangle.Margin = new Thickness(Mouse.GetPosition(BaseWindow).X, Mouse.GetPosition(BaseWindow).Y, 0, 0);
+            Y = SelectRectangle.Margin.Top;
+            X = SelectRectangle.Margin.Left;
             BaseWindow.MouseMove += BaseWindow_MouseMove;
-            grid.Children.Add(Select);
+            grid.Children.Add(SelectRectangle);
         }
 
 
@@ -103,21 +107,21 @@ namespace Screnshots
         {
             if (Mouse.GetPosition(BaseWindow).X < X)
             {
-                Select.Margin = new Thickness(Mouse.GetPosition(BaseWindow).X, Select.Margin.Top, 0, 0);
-                Select.Width = Math.Abs(Mouse.GetPosition(BaseWindow).X - X);
+                SelectRectangle.Margin = new Thickness(Mouse.GetPosition(BaseWindow).X, SelectRectangle.Margin.Top, 0, 0);
+                SelectRectangle.Width = Math.Abs(Mouse.GetPosition(BaseWindow).X - X);
             }
             else
             {
-                Select.Width = Math.Abs(Mouse.GetPosition(BaseWindow).X - Select.Margin.Left);
+                SelectRectangle.Width = Math.Abs(Mouse.GetPosition(BaseWindow).X - SelectRectangle.Margin.Left);
             }
             if (Mouse.GetPosition(BaseWindow).Y < Y)
             {
-                Select.Margin = new Thickness(Select.Margin.Left, Mouse.GetPosition(BaseWindow).Y, 0, 0);
-                Select.Height = Math.Abs(Mouse.GetPosition(BaseWindow).Y - Y);
+                SelectRectangle.Margin = new Thickness(SelectRectangle.Margin.Left, Mouse.GetPosition(BaseWindow).Y, 0, 0);
+                SelectRectangle.Height = Math.Abs(Mouse.GetPosition(BaseWindow).Y - Y);
             }
             else
             {
-                Select.Height = Math.Abs(Mouse.GetPosition(BaseWindow).Y - Select.Margin.Top);
+                SelectRectangle.Height = Math.Abs(Mouse.GetPosition(BaseWindow).Y - SelectRectangle.Margin.Top);
             }
         }
 

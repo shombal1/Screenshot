@@ -9,72 +9,64 @@ namespace Screnshots
 {
     public static class Settings
     {
+        private static Key firstKeyShow = (Key)GlobalSettings.Default.FirstKeyShow;
+        private static Key secondKeyShow = (Key)GlobalSettings.Default.SecondKeyShow;
+        private static Key firstKeyHide = (Key)GlobalSettings.Default.FirstKeyHide;
+        private static Key secondKeyHide = (Key)GlobalSettings.Default.SecondKeyHide;
+        private static Key createScreenshotFirstKey = (Key)GlobalSettings.Default.CreateScreenshotFirstKey;
+        private static Key createScreenshotSecondKey = (Key)GlobalSettings.Default.CreateScreenshotSecondKey;
+
         public static Key FirstKeyShow
         {            
-            get { return (Key)GlobalSettings.Default.FirstKeyShow; }
-            set
-            {
-                GlobalSettings.Default.FirstKeyShow=(int)value;
-            }
+            get { return firstKeyShow; }
+            set { firstKeyShow =value; }
         }
         public static Key SecondKeyShow
         {
-            get { return (Key)GlobalSettings.Default.SecondKeyShow; }
-            set
-            {
-                GlobalSettings.Default.SecondKeyShow=(int)value;
-            }
+            get { return secondKeyShow; }
+            set { secondKeyShow=value; }
         }
         public static Key FirstKeyHide
         {
-            get { return (Key)GlobalSettings.Default.FirstKeyHide; }
-            set
-            {
-                GlobalSettings.Default.FirstKeyHide=(int)value;
-            }
+            get { return firstKeyHide; }
+            set { firstKeyHide=value; }
         }
         public static Key SecondKeyHide
         {
-            get { return (Key)GlobalSettings.Default.SecondKeyHide; }
-            set
-            {
-                GlobalSettings.Default.SecondKeyHide = (int)value;
-            }
+            get { return secondKeyHide; }
+            set { secondKeyHide=value; }
         }
         public static Key CreateScreenshotFirstKey
         {
-            get { return (Key)GlobalSettings.Default.CreateScreenshotFirstKey; }
-            set
-            {
-                GlobalSettings.Default.CreateScreenshotFirstKey = (int)value;
-            }
+            get { return createScreenshotFirstKey; }
+            set { createScreenshotFirstKey=value; }
         }
         public static Key CreateScreenshotSecondKey
         {
-            get{ return (Key)GlobalSettings.Default.CreateScreenshotSecondKey; }
-            set
-            {
-                GlobalSettings.Default.CreateScreenshotSecondKey = (int)value;
-            }
+            get { return createScreenshotSecondKey; }
+            set { createScreenshotSecondKey=value; }
         }
         public static long NumberSave
         {
             get { return GlobalSettings.Default.NumberSave; }
-            set
-            {
-                GlobalSettings.Default.NumberSave = value;
-            }
+            set { GlobalSettings.Default.NumberSave = value; }
         }
         public static String PathSave
         {
-            get { return GlobalSettings.Default.PathSave; }
-            set
-            {
-                GlobalSettings.Default.PathSave = value;
-            }
+            get { return GlobalSettings.Default.PathSave;}
+            set { GlobalSettings.Default.PathSave = value; }
         }
 
-        public static void Save() => GlobalSettings.Default.Save();
-
+        public static void Save()
+        {
+            GlobalSettings.Default.FirstKeyShow = (int)firstKeyShow;
+            GlobalSettings.Default.SecondKeyShow = (int)secondKeyShow;
+            GlobalSettings.Default.FirstKeyHide = (int)firstKeyHide;
+            GlobalSettings.Default.SecondKeyHide = (int)secondKeyHide;
+            GlobalSettings.Default.CreateScreenshotFirstKey = (int)createScreenshotFirstKey;
+            GlobalSettings.Default.CreateScreenshotSecondKey = (int)createScreenshotSecondKey;
+            GlobalSettings.Default.Save();
+        }
+        
     }
 }
